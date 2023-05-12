@@ -19,9 +19,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Basic
     @Column(name = "date_of_creating")
     private LocalDateTime dateOfCreating;
 
+    @Basic
     @Column (name = "date_of_changing")
     private LocalDateTime dateOfChanging;
 
@@ -33,6 +35,13 @@ public class User {
     private List<Role> rolesList;
 
     public User() {
+    }
+
+    public User(String userName, String login, String password, List<Role> rolesList) {
+        this.userName = userName;
+        this.login = login;
+        this.password = password;
+        this.rolesList = rolesList;
     }
 
     public User(int userId, String userName, String login, String password, LocalDateTime dateOfCreating, LocalDateTime dateOfChanging) {
