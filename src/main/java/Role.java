@@ -12,11 +12,10 @@ public class Role {
     @Column (name = "role_name")
     private String roleName;
 
-    @ManyToMany
-//            (mappedBy = "rolesList", cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.PERSIST)
     @JoinTable(name = "users_and_roles",
-            joinColumns = @JoinColumn(name = "role_id", referencedColumnName="role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName="user_id")
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> userList;
 

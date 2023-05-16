@@ -6,4 +6,5 @@ public interface RoleDAO {
     List<Role> getAllRoles();
     void updateRoleById(Role role);
     void deleteRoleById(Role role);
+    List<User> getRoleUsers(int id);
 }

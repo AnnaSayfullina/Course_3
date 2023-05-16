@@ -1,6 +1,7 @@
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -29,8 +30,8 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "users_and_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName="user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName="role_id")
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> rolesList;
 
@@ -126,6 +127,20 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfCreating=" + dateOfCreating +
                 ", dateOfChanging=" + dateOfChanging +
+                ", rolesList=" + rolesList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId);
     }
 }

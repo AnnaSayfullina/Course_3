@@ -38,7 +38,6 @@ public class UserDAOImpl implements UserDAO {
         String jpqlQuery = "SELECT e FROM User e";
         TypedQuery<User> query = entityManager.createQuery(jpqlQuery, User.class);
         List<User> userList =query.getResultList();
-
         entityManager.getTransaction().commit();
 
         entityManager.close();
@@ -46,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void updateUserById(User user) {
+    public void updateUser(User user) {
         EntityManager entityManager = HibernateUtil.getEntityManager();
 
         entityManager.getTransaction().begin();
@@ -74,5 +73,20 @@ public class UserDAOImpl implements UserDAO {
 
         entityManager.close();
 
+    }
+
+    @Override
+    public void addRoleToUser(int idUser, int idRole) {
+        EntityManager entityManager = HibernateUtil.getEntityManager();
+
+        entityManager.getTransaction().begin();
+        User user1 = entityManager.find(User.class, idUser);
+        Role role1 = entityManager.find(Role.class, idRole);
+        user1.getRolesList().add(role1);
+        user1.setDateOfChanging(LocalDateTime.now());
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
     }
 }

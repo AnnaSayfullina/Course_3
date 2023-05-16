@@ -26,6 +26,18 @@ public class RoleDAOImpl implements RoleDAO{
         return role;
     }
 
+    public List<User> getRoleUsers(int id){
+        EntityManager entityManager = HibernateUtil.getEntityManager();
+
+        entityManager.getTransaction().begin();
+        Role role = entityManager.find(Role.class, id);
+        List<User> users = role.getUserList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return users;
+    }
+
     @Override
     public List<Role> getAllRoles() {
         EntityManager entityManager = HibernateUtil.getEntityManager();
