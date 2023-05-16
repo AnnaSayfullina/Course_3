@@ -13,9 +13,7 @@ public class Application {
          * Получать список пользователей из БД;
          */
         List<User> userList1 = userDAO.getAllUsers();
-        for(User el: userList1){
-            System.out.println(el);
-        }
+        System.out.println(userList1);
 
         /**
          * Получать конкретного пользователя (с его ролями) из БД
